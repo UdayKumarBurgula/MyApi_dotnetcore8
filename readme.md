@@ -1,4 +1,4 @@
-
+﻿
 Create the Web API project
 --------------------------------
 dotnet new webapi -n MyApi
@@ -60,7 +60,7 @@ dotnet build
 
 Error
 --------------------
-AddSwaggerGen is not part of ASP.NET Core by default � it comes from Swagger / OpenAPI packages, and they�re simply not installed.
+AddSwaggerGen is not part of ASP.NET Core by default — it comes from Swagger / OpenAPI packages, and they’re simply not installed.
 
 Add Swagger package
 ---------------------------------------------
@@ -128,4 +128,48 @@ MyApi>dotnet tool run dotnet-ef migrations add InitialCreate --context AppDbCont
 Build started...
 Build succeeded.
 Done. To undo this action, use 'ef migrations remove'
+
+MyApi>dotnet tool run dotnet-ef database update --context AppDbContext
+
+Add file docker-compose.yml
+MyApi> docker compose up -d
+
+Make sure the docker desktop is running.
+
+MyApi> docker compose up -d
+[+] Running 16/16
+ ✔ postgres Pulled                                                                                                14.5s
+   ✔ a77625ddab57 Pull complete                                                                                    1.0s
+   ✔ a2f4fb31fafd Pull complete                                                                                    6.7s
+   ✔ d6ba2dba483d Pull complete                                                                                    0.8s
+   ✔ e65abb0dfda2 Pull complete                                                                                    8.8s
+   ✔ 27cce642b31e Pull complete                                                                                    1.3s
+   ✔ 52e9beb5a887 Pull complete                                                                                    1.3s
+   ✔ 4b9c761c0414 Pull complete                                                                                    1.7s
+   ✔ e46c85978ff6 Pull complete                                                                                    8.9s
+   ✔ 9d9219b46c76 Pull complete                                                                                    1.4s
+   ✔ bd6fc428af63 Pull complete                                                                                    1.4s
+   ✔ 0b5d5a42833c Pull complete                                                                                    5.9s
+   ✔ 6731da0a1dbc Pull complete                                                                                    5.9s
+   ✔ ebdc127e517b Pull complete                                                                                    0.8s
+   ✔ 442d2119ce56 Download complete                                                                                0.0s
+   ✔ e779d5b62af1 Download complete                                                                                0.5s
+[+] Running 3/3
+ ✔ Network myapi_default     Created                                                                               0.1s
+ ✔ Volume myapi_pgdata       Created                                                                               0.0s
+ ✔ Container myapi-postgres  Started                                                                               1.0s
+
+
+MyApi>dotnet tool run dotnet-ef migrations add InitialCreate2 --context AppDbContext
+Build started...
+Build succeeded.
+Done. To undo this action, use 'ef migrations remove'
+
+MyApi>dotnet tool run dotnet-ef database update --context AppDbContext
+Build started...
+Build succeeded.
+Applying migration '20251225143747_InitialCreate2'.
+Done.
+
+
 
