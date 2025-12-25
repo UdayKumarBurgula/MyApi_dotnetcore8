@@ -68,3 +68,64 @@ dotnet add package Swashbuckle.AspNetCore --version 6.6.2
 
 
 dotnet tool install --global dotnet-ef
+
+error:
+-------------
+MyApi>dotnet tool install --global dotnet-ef
+Package Source Mapping is enabled, but no source found under the specified package ID: dotnet-ef. See the documentation for Package Source Mapping at https://aka.ms/nuget-package-source-mapping for more details.
+
+MyApi>dotnet new tool-manifest --force
+MyApi>dotnet tool install dotnet-ef --version 8.0.8 --add-source https://api.nuget.org/v3/index.json
+
+You can invoke the tool from this directory using the following commands: 'dotnet tool run dotnet-ef' or 'dotnet dotnet-ef'.
+Tool 'dotnet-ef' (version '8.0.8') was successfully installed. Entry is added to the manifest file D:\Develop\Dotnet\MyApi\.config\dotnet-tools.json.
+
+MyApi>dotnet tool run dotnet-ef --version
+Entity Framework Core .NET Command-line Tools
+8.0.8
+
+AppDbContext.cs
+-----------------------
+using Microsoft.EntityFrameworkCore;
+
+namespace MyApi.Data;
+
+public class AppDbContext : DbContext
+{
+    public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
+}
+
+Program.cs
+-----------------
+using Microsoft.EntityFrameworkCore;
+using MyApi.Data;
+
+var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseNpgsql(builder.Configuration.GetConnectionString("Default")));
+
+var app = builder.Build();
+app.MapControllers();
+app.Run();
+
+appsettings.json
+---------------------------
+{
+  "ConnectionStrings": {
+    "Default": "Host=Local;Port=5432;Database=db;Username=username;Password=password"
+  }
+}
+
+dotnet build
+
+Run migrations with explicit project flags (very common fix)
+---------------------------------------------------------------------------
+dotnet tool run dotnet-ef migrations add InitialCreate --project MyApi.csproj --startup-project MyApi.csproj --context AppDbContext
+
+
+MyApi>dotnet tool run dotnet-ef migrations add InitialCreate --context AppDbContext
+Build started...
+Build succeeded.
+Done. To undo this action, use 'ef migrations remove'
+
