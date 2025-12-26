@@ -172,4 +172,25 @@ Applying migration '20251225143747_InitialCreate2'.
 Done.
 
 
+MyApi>docker ps
+CONTAINER ID   IMAGE         COMMAND                  CREATED       STATUS       PORTS                                         NAMES
+4de60256a93c   postgres:16   "docker-entrypoint.s…"   2 hours ago   Up 2 hours   0.0.0.0:5432->5432/tcp, [::]:5432->5432/tcp   myapi-postgres
 
+MyApi>dotnet run
+-----------------------------
+MyApi>dotnet run
+Using launch settings from D:\Develop\Dotnet\MyApi\Properties\launchSettings.json...
+Building...
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://localhost:5110
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Development
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: D:\Develop\Dotnet\MyApi
+
+
+Browser using swagger 
+------------------------------
+http://localhost:5110/swagger/index.html

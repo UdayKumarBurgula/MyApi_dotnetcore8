@@ -9,8 +9,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseNpgsql(builder.Configuration.GetConnectionString("Default"))
-           .UseSnakeCaseNamingConvention());
+    options.UseNpgsql(builder.Configuration.GetConnectionString("Default")));
+           //.UseSnakeCaseNamingConvention());
 
 var app = builder.Build();
 
